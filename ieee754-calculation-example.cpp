@@ -28,10 +28,18 @@ uint8_t const EXPONENT_INFINITY_NAN = 255U;
  */
 float ieee_754(uint32_t const data)
 {
-    float value;
-    // This will fail the tests. Students should do the proper IEEE-754 calculation per assignment
-    // using the 32 bit 'data' value passed into this function.
-    value = 1.23;
+   uint32_t extract_sign(uint32_t const data) {
+    return (data >> 31) & 0x1U;
+}
+
+uint32_t extract_exponent(uint32_t const data) {
+    return (data >> 23) & 0xFFU;
+}
+
+uint32_t extract_mantissa(uint32_t const data) {
+    return data & MANTISSA_MASK;
+}
+    
     return value;
 }
 
