@@ -18,7 +18,9 @@ uint8_t const width = 32U;
 uint8_t const exp_width = 8U;
 uint8_t const mantissa_width = width - exp_width - 1;
 uint8_t const bias = 127U;
-
+uint32_t const MANTISSA_MASK = 0x007FFFFFU;
+uint8_t const EXPONENT_ZERO = 0U;
+uint8_t const EXPONENT_INFINITY_NAN = 255U;
 /*
  * *** STUDENTS SHOULD WRITE CODE FOR THIS FUNCTION ***
  * Students should create or add any data structures needed.
