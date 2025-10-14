@@ -73,9 +73,14 @@ float ieee_754(uint32_t const data) {
         return numeric_limits<float>::quiet_NaN();
 }
     
-    return value;
+// Normal case
+    int32_t const actual_exponent = static_cast<int32_t>(exponent) - bias;
+    float const mantissa_fraction = calculate_mantissa_fraction(mantissa);
+    float const mantissa_value = 1.0f + mantissa_fraction;
+    float const result = mantissa_value * powf(2.0f, static_cast<float>(actual_exponent));
+    
+return apply_sign(result, sign_bit);
 }
-
 /*
  * *** STUDENTS SHOULD NOT NEED TO CHANGE THE CODE BELOW. IT IS A CUSTOM TEST HARNESS. ***
  */
