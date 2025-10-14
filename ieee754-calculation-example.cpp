@@ -26,9 +26,7 @@ uint8_t const EXPONENT_INFINITY_NAN = 255U;
  * Students should create or add any data structures needed.
  * Students should create or add any functions or classes they may need.
  */
-float ieee_754(uint32_t const data)
-{
-   uint32_t extract_sign(uint32_t const data) {
+uint32_t extract_sign(uint32_t const data) {
     return (data >> 31) & 0x1U;
 }
 
@@ -39,7 +37,15 @@ uint32_t extract_exponent(uint32_t const data) {
 uint32_t extract_mantissa(uint32_t const data) {
     return data & MANTISSA_MASK;
 }
-    
+
+float calculate_mantissa_fraction(uint32_t const mantissa) {
+    return static_cast<float>(mantissa) / static_cast<float>(1 << mantissa_width);
+]
+   
+float apply_sign(float const value, uint32_t const sign_bit) {
+    return sign_bit ? -value : value;
+   
+}
     return value;
 }
 
