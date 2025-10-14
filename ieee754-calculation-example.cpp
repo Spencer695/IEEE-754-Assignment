@@ -44,8 +44,35 @@ float calculate_mantissa_fraction(uint32_t const mantissa) {
    
 float apply_sign(float const value, uint32_t const sign_bit) {
     return sign_bit ? -value : value;
-   
 }
+
+float ieee_754(uint32_t const data) {
+    uint32_t const sign_bit = extract_sign(data);
+    uint32_t const exponent = extract_exponent(data);
+    uint32_t const mantissa = extract_mantissa(data);
+    
+    // Special case: Zero
+    if (exponent == EXPONENT_ZERO && mantissa == 0) {
+        return apply_sign(0.0f, sign_bit);
+    }
+    
+    // Special case: Denormalized numbers
+    if (exponent == EXPONENT_ZERO) {
+        float const mantissa_fraction = calculate_mantissa_fraction(mantissa);
+        float const result = mantissa_fraction * powf(2.0f, 1 - bias);
+        return apply_sign(result, sign_bit);
+    }
+    
+    // Special case: Infinity
+    if (exponent == EXPONENT_INFINITY_NAN && mantissa == 0) {
+        return apply_sign(numeric_limits<float>::infinity(), sign_bit);
+    }
+    
+    // Special case: Not a number
+    if (exponent == EXPONENT_INFINITY_NAN) {
+        return numeric_limits<float>::quiet_NaN();
+}
+    
     return value;
 }
 
