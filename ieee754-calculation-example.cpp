@@ -19,12 +19,6 @@ uint8_t const exp_width = 8U;
 uint8_t const mantissa_width = width - exp_width - 1;
 uint8_t const bias = 127U;
 
-/*
- * *** STUDENTS SHOULD WRITE CODE FOR THIS FUNCTION ***
- * Students should create or add any data structures needed.
- * Students should create or add any functions or classes they may need.
- */
-
 // IEEE-754 data structures added for clarity
 uint32_t const MANTISSA_MASK = 0x007FFFFFU;
 uint8_t const EXPONENT_ZERO = 0U;
@@ -97,10 +91,6 @@ float ieee_754(uint32_t const data) {
     // Apply sign
     return apply_sign(result, sign_bit);
 }
-
-/*
- * *** STUDENTS SHOULD NOT NEED TO CHANGE THE CODE BELOW. IT IS A CUSTOM TEST HARNESS. ***
- */
 
 void header() {
     cout << left << setw(table_width[0]) << setfill(' ') << "pass/fail";
